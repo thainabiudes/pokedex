@@ -60,6 +60,7 @@ public class PokeListActivity extends AppCompatActivity {
                         String jsonDetail = new Gson().toJson(detail);
                         intent.putExtra("detail", jsonDetail);
                         intent.putExtra("nome", pokemon.getName());
+                        intent.putExtra("img", pokemon.getImage());
 
                         startActivity(intent);
                     }

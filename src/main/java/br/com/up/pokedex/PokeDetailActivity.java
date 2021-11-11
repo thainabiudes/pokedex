@@ -2,11 +2,12 @@ package br.com.up.pokedex;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
-
+import com.squareup.picasso.Picasso;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import android.os.Bundle;
@@ -37,6 +38,13 @@ public class PokeDetailActivity extends AppCompatActivity{
         setContentView(R.layout.activity_poke_detail);
 
         String pokemonName = getIntent().getExtras().getString("nome");
+        String pokemonImage = getIntent().getExtras().getString("img");
+
+        ImageView imageView = (ImageView) findViewById(R.id.image_detail);
+        Picasso.get().load(pokemonImage).into(imageView);
+
+        TextView textViewTitle = (TextView)findViewById(R.id.title_detail);
+        textViewTitle.setText(pokemonName);
 
         String json = getIntent().getExtras().getString("detail");
         this.detail = new Gson().fromJson(json, ResponseDetail.class);
@@ -44,7 +52,7 @@ public class PokeDetailActivity extends AppCompatActivity{
         ListView listViewAbilities = (ListView) findViewById(R.id.listDetail);
         TextView textViewAbilities = (TextView)findViewById(R.id.titleAbility);
 
-        textViewAbilities.setText("Abilities - " + pokemonName);
+        textViewAbilities.setText("Abilities");
 
         ArrayAdapter<String> arr;
         arr = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, this.getAbilities());
@@ -55,7 +63,7 @@ public class PokeDetailActivity extends AppCompatActivity{
         ListView listViewMoves = (ListView) findViewById(R.id.listDetailMove);
         TextView textViewMoves = (TextView)findViewById(R.id.titleMove);
 
-        textViewMoves.setText("Moves - " + pokemonName);
+        textViewMoves.setText("Moves");
 
         ArrayAdapter<String> arrMoves;
         arrMoves = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, this.getMoves());
@@ -66,7 +74,7 @@ public class PokeDetailActivity extends AppCompatActivity{
         ListView listViewStats = (ListView) findViewById(R.id.listDetailStat);
         TextView textViewStats = (TextView)findViewById(R.id.titleStat);
 
-        textViewStats.setText("Stats - " + pokemonName);
+        textViewStats.setText("Stats");
 
         ArrayAdapter<String> arrStats;
         arrStats = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, this.getStats());
@@ -77,7 +85,7 @@ public class PokeDetailActivity extends AppCompatActivity{
         ListView listViewTypes = (ListView) findViewById(R.id.listDetailType);
         TextView textViewTypes = (TextView)findViewById(R.id.titleType);
 
-        textViewTypes.setText("Types  - " + pokemonName);
+        textViewTypes.setText("Types");
 
         ArrayAdapter<String> arrTypes;
         arrTypes = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, this.getTypes());
